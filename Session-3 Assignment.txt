@@ -1,0 +1,195 @@
+1.Sunil has already used equals() method many times. Now he is gonna use it again to check for some mishappenings in his application. 
+In his Assumption, if 2 users are entering addresses in their respective profile and he doesn’t want them to enter the same address by mistake. 
+Help him to do this.
+
+Write a program to show "RED" is the address entered are the same and so on. Refer output format for further details.
+
+Problem Constraints:
+Use equals() and equalsIgnoreCase()
+
+Input Format:
+The first line input corresponds to the address 1.
+The second line input corresponds to the address 2.
+Refer to sample input for formatting specifications.
+
+Output Format:
+The output consists of a string. It displays
+
+RED - If two addresses are the same.
+
+YELLOW - If two addresses are the same but the mismatch in spaces.
+BLUE - If two addresses are the same but the mismatch in cases.
+
+GREEN - If two addresses are different.
+
+Refer to sample output for formatting specifications.
+
+Note: All text in bold corresponds to input and rest corresponds to the output
+
+Sample Input and Output 1 :
+Address 1:
+Us road,2nd cross Extension,chennai,India
+Address 2:
+kattoor road,2nd cross extension,chennai,india
+BLUE
+
+Sample Input/Output -2 :
+Address 1:
+KR main road,Kashmir,India
+Address 2:
+KR Street,Kashmir,India
+GREEN
+
+Program
+
+
+import java.io.*;
+import java.util.Scanner;
+public class Task {
+
+	public static void main(String args[]) {
+		Scanner input= new Scanner(System.in);
+		System.out.println("Address 1:");
+		String s1=input.nextLine();
+		System.out.println("Address 2:");		
+		String s2=input.nextLine();
+		if(s1.equals(s2))
+		{
+			System.out.println("Red");
+		}
+		else if(s1.equalsIgnoreCase(s2))
+		{
+			System.out.println("Blue");
+		}
+		else if(s1.equals(s2.replaceAll("\\s+",""))) {
+			System.out.println("Yellow");
+		}
+		else
+		{
+			System.out.println("Green");
+		}
+	}
+	
+}
+
+
+
+==============================================================================================================
+2.
+
+When we get the address from the user some have entered in comma separated format rather than in specific fields. So we need a program that can split the address into appropriate fields. Let's write it and display the address that has been split in tabular form.
+ 
+
+Display the address in a tabular format using format method - System.out.format("%-15s %-15s %-15s %s\n", "User ID","Street","City","State").
+ 
+
+Input Format:
+The first line input corresponds to the number of users 'n'.
+The next 'n' line of inputs corresponds to the address details of the user in CSV format (User ID,Street,City,State).
+Refer sample input for formatting specifications.
+
+Output Format:
+The output consists of user address details in the tabular format.
+Refer sample output for formatting specifications.
+ 
+ 
+
+Sample Input/Output-1:
+Enter the number of users:
+4
+Enter user address details in CSV format(User ID,Street,City,State):
+101,College Road,Coimbatore,Tamil Nadu
+102,Newton city,Louisville,Texas
+103,Faisar Street,Ambedkar nagar,Uttar Pradesh
+104,Kattor road,Ludiana,Haryana
+User ID       Street               City                       State
+101             College Road   Coimbatore           Tamil Nadu
+102             Newton city       Louisville              Texas
+103             Faisar Street    Ambedkar nagar  Uttar Pradesh
+104             Kattor road       Ludiana                Haryana
+
+
+Program
+
+
+import java.io.*;
+import java.util.Scanner;
+public class Task2 {
+	   public static void main(String[] args) {
+	        Scanner input= new Scanner(System.in);
+	        Scanner in = new Scanner(System.in);
+	        int n;
+	        System.out.println("Enter the no. of Users:");
+	        n = input.nextInt();
+	        String[] arr = new String[n];
+	        System.out.println("Enter user address details in CSV format(User ID,Street,City,State):");
+
+
+
+	       for(int i = 0 ; i < n ; i++){
+	            arr[i] = in.nextLine();
+	        }
+
+
+
+	       System.out.format("%-15s %-15s %-15s %s\n", "User ID","Street","City","State");
+	        for(String i : arr){
+	            String[] res = i.split(",");
+	            System.out.format("%-15s %-15s %-15s %s\n", res[0],res[1],res[2],res[3]);
+	        }
+	    }
+	}
+
+
+==============================================================================================================
+3.
+Removing multiple spaces
+
+Write a program to remove multiple spaces in a string.
+
+ 
+
+Input and Output Format:
+
+Refer sample input and output for formatting specifications.
+
+All text in bold corresponds to input and the rest corresponds to output.
+
+ 
+
+Sample Input and Output :
+
+Enter the string
+
+Java             is                           an                 Object Oriented Prog Language
+
+The processed string is Java is an Object Oriented Prog Language
+
+program
+
+
+
+import java.io.*;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+public class Task3 {
+
+	public static void main(String [] args) {
+		
+		Scanner input=new Scanner(System.in);
+		System.out.println("Enter String:");
+		String str=input.nextLine(); 
+		StringTokenizer st = new StringTokenizer(str, " ");
+		StringBuffer sb = new StringBuffer();
+		 
+		while(st.hasMoreElements())
+		{
+		    sb.append(st.nextElement()).append(" ");
+		}
+		 
+		String result = sb.toString();
+		 
+		System.out.println( result );
+		 
+	}
+}

@@ -1,0 +1,304 @@
+1. A new announcement has been made by the Mayor, the Fair will be on for more than a month. For rewarding customers who actively purchase in the fair, the developers are asked to compute reward points for credit card purchasing. For a small demo implementation, we now compute reward points for VISA card and HP VISA card. The reward points for VISA card is 1% of the spending for all kinds of purchases. For HP Visa card, 10 additional points are given for fuel purchases. Also, include method Overriding for the method computeRewardPoints() which computes the reward points for both types. write a program using the above specification for computing the reward points.
+
+Create a class named VISACard with the following private attributes
+Attributes	Datatype
+holderName	String
+ccv	String
+
+the VISACard class has the following methods
+Method name	Method Description
+public Double computeRewardPoints(String purchaseType, Double amount)	This method accepts the type and amount as inputs and
+displays the reward points which is 1% of the amount
+
+Create a class named HPVISACard that extends VISACard with the following methods
+Method name	Method Description
+public Double computeRewardPoints(String purchaseType, Double amount)	This method accepts the type and amount as inputs and
+displays the reward points which is 1% of the amount.
+If the type is "Fuel" 10 more points are given.
+
+Create a driver class called Main. In the Main method, obtain inputs from the user and compute the reward points by calling appropriate methods. If choice other than specified is chosen, print "Invalid choice"
+
+Hint: Call Super() to access the computeRewardPoints in the derived class and add additional points if given criteria qualifies.
+Note: Display one digit after the decimal point for Double values.
+[Strictly adhere to the Object-Oriented Specifications given in the problem statement.
+All class names, attribute names and method names should be the same as specified in the problem statement.]
+
+[All text in bold corresponds to the input and rest corresponds to the output]
+Sample Input/Output:
+
+Enter the holder name
+Mahesh
+Enter the CCV number
+9871-9874-4569
+Enter the bill amount
+1000
+Mention the type of spending
+Fuel
+Choose card type
+1.VISA card
+2.HP VISA card
+1
+Holder name:Mahesh
+CCV:9871-9874-4569
+Reward points:10.0
+Do you want to continue?(Y/N)
+N
+ 
+
+Program
+
+import java.io.*;
+import java.util.Scanner;
+public class Main {
+	
+	public static void main(String [] args) {
+		Scanner input = new Scanner(System.in) ;
+		String holderName, cvv,purchaseType;
+		double amount,res = 0;
+		int card;
+		char s;
+		do {	
+		
+		System.out.println("Enter the holder name:");
+		holderName = input.next();
+		
+		System.out.println("Enter the CCV number:");
+		 cvv = input.next();
+		
+		System.out.println("Enter bill amount:");
+		 amount = input.nextDouble();
+		 
+		System.out.println("Mention the type of spending");
+		 purchaseType = input.next();
+		
+		System.out.println("Choose card type \r\n" +"1.VISA card \r\n" + "2.HP VISA card");
+		 card = input.nextInt();
+		 switch(card)
+		 {
+		 case 1:
+		 	{
+		 		VISACard visa = new VISACard(holderName,cvv);
+		 		res= visa.computeRewardPoints(purchaseType, amount);
+		 	}
+		 case 2:
+		 {
+			 	HPVISACard hpvisa = new HPVISACard(holderName,cvv);
+			 	res= hpvisa.computeRewardPoints(purchaseType, amount);
+		 }
+		 default:
+			 System.out.println("Invalid Card");break;
+		 }
+		System.out.println("Holder Name: ");
+		System.out.println("CVV: "+ cvv);
+		System.out.println("RewardPoints: "+ res);
+		
+		System.out.println("Do you want to continue?(Y/N):");
+		s = input.next().charAt(0);
+		
+		}while(s=='y');
+	}	
+}
+
+
+public class VISACard {
+	private
+	String holderName;
+	String cvv;
+	
+	public
+	VISACard(String Name,String cardNum){
+		this.holderName=Name;
+		this.cvv=cardNum;
+	};
+	
+	public double computeRewardPoints(String purchaseType, double amount) {
+		
+		return amount*0.01;
+	}
+	public String getterName() {
+		return this.holderName;
+	}
+	public void setCvv(String cvv) {
+		this.cvv=cvv;
+	}
+}
+
+
+public class HPVISACard extends VISACard{
+
+	HPVISACard(String Name,String cardNum)
+	{
+		super(Name,cardNum);
+	}
+
+	public double computeRewardPoints(String purchaseType, double amount) {
+		double points=0;
+		if(purchaseType.equals("Fuel"))
+		{
+			points = 10.0;
+		}
+		else
+		{
+			points = amount*0.01;
+		}
+		return points;
+	}
+}
+
+
+2. Using Super and this keyword-
+Create an Event class with protected attributes
+ 
+Attributes	Datatype
+name	String
+detail	String
+type	String
+organiserName	String
+ 
+Create an Exhibition class with following private attributes
+ 
+Attributes	Datatype
+noOfStalls	Integer
+ 
+Create a StageEvent class with following private attributes
+ 
+Attributes	Datatype
+noOfSeats	Integer
+ 
+Now include appropriate getters and setters for all the classes.
+Include a default constructor and parameterized constructor for all the classes.
+
+The format for Parameterized constructors:
+
+public Event(String name, String detail, String type, String organiserName)
+public Exhibition(String name, String detail, String type, StringorganiserName, Integer noOfStalls)
+public StageEvent(String name, String detail, String type, StringorganiserName, Integer noOfSeats)
+
+Create a driver class called Main. In the Main method, obtain input from the user and create StageEvent or Exhibition objects accordingly. At last print the details of the object appropriately (Refer Sample I/O).
+Note: If choice other than specified is chosen, print "Invalid choice" and terminate.
+[Strictly adhere to the Object-Oriented Specifications given in the problem statement.
+All class names, attribute names and method names should be the same as specified in the problem statement.]
+
+[All text in bold corresponds to the input and rest corresponds to output]
+Sample Input/Output 1:
+
+Choose Event type
+1.Exhibition
+2.StageEvent
+1
+Enter the details in CSV format
+Book expo,special sale,Academics,Mahesh,10
+Event Name:Book expo
+Detail:special sale
+Type:Academics
+Organiser Name:Mahesh
+Number of stalls:10
+
+Sample Input/Output 2:
+
+Choose Event type
+1.Exhibition
+2.StageEvent
+2
+Enter the details in CSV format
+JJ magic show,New Year Special,Comedy magic,J Jegadeesh,100
+Event Name:JJ magic show
+Detail:New Year Special
+Type:Comedy magic
+Organiser Name:J Jegadeesh
+Number of seats:100
+
+Sample Input/Output 3:
+Choose Event type
+1.Exhibition
+2.StageEvent
+3
+Invalid choice
+
+
+Program
+
+import java.util.Scanner;
+
+class Event
+	{    
+		protected String name,detail,type,organiserName ;
+		Event()    {}    
+		Event(String name,String detail,String type,String organiserName )    {        
+			this.name=name;
+		        this.detail=detail;
+		        this.type=type;
+		        this.organiserName =organiserName ;
+		    }        
+	}
+
+
+class Exhibition extends Event	{            
+		private int noOfStalls;
+		Exhibition(String name,String detail,String type,String organiserName,int noOfStalls)    {
+        	super(name,detail,type,organiserName);
+	        this.noOfStalls=noOfStalls;
+	    }        
+		public void show()    {        
+			System.out.println("EventName  "+name);
+		        System.out.println("Detail  "+detail);
+		        System.out.println("Type  "+type);
+		        System.out.println("Organiser  "+organiserName);        
+			System.out.println("Number of seats "+noOfStalls);
+		    }                
+	}
+
+class StageEvent extends Event{
+	    private int noOfSeats;
+	    public StageEvent(String name, String detail, String type, String organiserName,int noOfSeats)    {
+	        super(name,detail,type,organiserName);
+	        this.noOfSeats =noOfSeats ;    } 
+	    public void show()    {
+	        System.out.println("EventName  "+name);
+	        System.out.println("Detail  "+detail);   
+		System.out.println("Type  "+type);
+	        System.out.println("Organiser  "+organiserName);
+	        System.out.println("Number of seats "+noOfSeats);    }        
+}
+
+
+
+
+	public class Main {    
+		public static void main(String args[])    {   
+		     char c='y'; 
+		       do {   
+		             int choice;
+			     System.out.println("Choose Event type");
+			     System.out.println("1.Exhibition \r\n" +"2.StageEvent"); 
+			     Scanner sc=new Scanner(System.in);
+			     choice=Integer.valueOf(sc.nextLine());
+			     System.out.println("Enter the details in CSV format");
+		             String s=sc.nextLine();
+		             String EventName = s.split(",")[0];
+			     String Detail = s.split(",")[1];
+			     String Type = s.split(",")[2];
+			     String organiserName = s.split(",")[3];
+		             if(choice==1) {
+			             int noOfStalls;
+			             System.out.println("Enter the no of seats"); 
+			             noOfStalls=sc.nextInt();  
+			             Exhibition e=new Exhibition(EventName,Detail,Type,organiserName,noOfStalls);
+			             e.show();
+                                   }         
+			     else if(choice==2) {             
+					int noOfSeats;                
+					System.out.println("Enter the no of stalls");                 
+					noOfSeats=sc.nextInt();                 
+					StageEvent e=new StageEvent(EventName,Detail,Type,organiserName,noOfSeats);
+                 			e.show();                      
+				}         
+		  	     else{             
+					System.out.println("Invalid option");         }
+			    System.out.println("would you like to continue y/n");         
+			    c=sc.next().charAt(0);        
+		}while(c=='y');                    
+}
+
+}
+
